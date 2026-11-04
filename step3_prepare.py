@@ -57,7 +57,7 @@ def normalize(bbox, kpts, vis):
     return np.concatenate([out.flatten(), v.astype(np.float32)])
 
 X = np.stack([normalize(b, k, v) for b, k, v in zip(df["bbox"], df["kpts"], df["vis"])])
-y = df["species"].values
+y = df["species"].to_numpy().astype(str)
 
 # ---------- 5. Split by image, stratified by species ----------
 sgkf = StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42)
